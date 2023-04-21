@@ -122,4 +122,18 @@ contract Auction {
             // generate random# from block number
             uint randomIndex = (block.number / currentItem.itemTokens.length)% currentItem.itemTokens.length;
             // Obtain the winning tokenId
+             uint winnerId = currentItem.itemTokens[randomIndex];
+
+            /* Part 1 Task 6. Assign the winners.
+            Hint." bidders[winnerId] " will give you the person object with the winnerId.
+            you need to assign the address of the person obtained above to winners[id] */
+
+            // ** Start coding here *** 1 line approximately.
+            winners[id] = bidders[winnerId].addr;
+
+            //** end code here*
+
+            }
+        }
+    }
 
