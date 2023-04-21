@@ -99,3 +99,27 @@ contract Auction {
             bidItem.itemTokens.push(tokenDetails[msg.sender].personId);
         }
     }
+    
+     // Part 2 Task 1. Create a modifier named "onlyOwner" to ensure that only owner is allowed to reveal winners
+    //Hint : Use require to validate if "msg.sender" is equal to the "beneficiary".
+    modifier onlyOwner {
+        // ** Start code here. 2 lines approximately. **
+        require(msg.sender == beneficiary);
+        _;
+        //** End code here. **
+    }
+
+
+    function revealWinners() public onlyOwner{
+
+        /*
+            Iterate over all the items present in the auction.
+            If at least on person has placed a bid, randomly select          the winner */
+
+        for (uint id = 0; id < 3; id++) {
+            Item storage currentItem=items[id];
+            if(currentItem.itemTokens.length != 0){
+            // generate random# from block number
+            uint randomIndex = (block.number / currentItem.itemTokens.length)% currentItem.itemTokens.length;
+            // Obtain the winning tokenId
+
