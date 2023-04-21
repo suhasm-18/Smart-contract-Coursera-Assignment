@@ -60,3 +60,42 @@ contract Auction {
         tokenDetails[msg.sender]=bidders[bidderCount];
         bidderCount++;
     }
+    
+         /*
+            Bids tokens to a particular item.
+            Arguments:
+            _itemId -- uint, id of the item
+            _count -- uint, count of tokens to bid for the item
+        */
+
+        /*
+        Part 1 Task 4. Implement the three conditions below.
+            4.1 If the number of tokens remaining with the bidder is < count of tokens bidded, revert.
+            4.2 If there are no tokens remaining with the bidder, revert.
+            4.3 If the id of the item for which bid is placed, is greater than 2, revert.
+        Hint: "tokenDetails[msg.sender].remainingTokens" gives the details of the number of tokens remaining with the bidder.
+        */
+
+        // ** Start code here. 2 lines approximately. **/
+
+        if( tokenDetails[msg.sender].remainingTokens < _count || tokenDetails[msg.sender].remainingTokens == 0 ) revert();
+        if(_itemId > 2) revert();
+
+        //** End code here. **
+
+        /*Part 1 Task 5. Decrement the remainingTokens by the number of tokens bid and store the value in balance variable.
+        Hint. "tokenDetails[msg.sender].remainingTokens" should be decremented by "_count". */
+        tokenDetails[msg.sender].remainingTokens = tokenDetails[msg.sender].remainingTokens - _count;
+        // ** Start code here. 1 line approximately. **
+
+        uint balance=tokenDetails[msg.sender].remainingTokens;
+        //** End code here. **
+
+        tokenDetails[msg.sender].remainingTokens=balance;
+        bidders[tokenDetails[msg.sender].personId].remainingTokens=balance;//updating the same balance in bidders map.
+
+        Item storage bidItem = items[_itemId];
+        for(uint i=0; i<_count;i++) {
+            bidItem.itemTokens.push(tokenDetails[msg.sender].personId);
+        }
+    }
