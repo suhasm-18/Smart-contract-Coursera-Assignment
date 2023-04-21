@@ -24,3 +24,22 @@ contract Auction {
     address public beneficiary;//owner of the smart contract
 
     uint bidderCount=0;//counter
+    
+     //functions
+
+    function Auction() public payable{    //constructor
+
+        //Part 1 Task 1. Initialize beneficiary with address of smart contract’s owner
+        //Hint. In the constructor,"msg.sender" is the address of the owner.
+        // ** Start code here. 1 line approximately. **/
+        beneficiary = msg.sender;
+          //** End code here. **/
+        uint[] memory emptyArray;
+        items[0] = Item({itemId:0,itemTokens:emptyArray});
+
+        //Part 1 Task 2. Initialize two items with at index 1 and 2.
+        // ** Start code here. 2 lines approximately. **/
+        items[1] = Item({itemId:1, itemTokens: emptyArray});
+        items[2] = Item({itemId:2, itemTokens: emptyArray});
+        //** End code here**/
+    }
