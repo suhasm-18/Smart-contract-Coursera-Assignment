@@ -43,3 +43,20 @@ contract Auction {
         items[2] = Item({itemId:2, itemTokens: emptyArray});
         //** End code here**/
     }
+    
+     function register() public payable{
+
+
+        bidders[bidderCount].personId = bidderCount;
+
+        //Part 1 Task 3. Initialize the address of the bidder
+        /*Hint. Here the bidders[bidderCount].addr should be initialized with address of the registrant.*/
+
+        // ** Start code here. 1 line approximately. **/
+        bidders[bidderCount].addr = msg.sender;
+        //** End code here. **
+
+        bidders[bidderCount].remainingTokens = 5; // only 5 tokens
+        tokenDetails[msg.sender]=bidders[bidderCount];
+        bidderCount++;
+    }
